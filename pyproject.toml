@@ -1,0 +1,57 @@
+[project]
+name = "pyutils"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "coverage>=7.14.3",
+    "pytest>=9.1.1",
+    "pytest-sugar>=1.1.1",
+]
+
+
+
+# PYTEST SETTINGS
+# ===============
+# for the proper start of the test use, do it in lwe_formats:
+# python -m pytest (auto inserts the path on the sys.path(...))
+# python -m pytest -k benchmark (starts only the tests with benchmark word in the names)
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "--strict-config",
+    "--strict-markers",
+    "-ra",
+    "-s",
+    #    "-n 4", # considers xdist, doesn't work with -n auto
+    #    "-v",
+]
+
+
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    #    "ignore::PendingDeprecationWarning",
+    #    "ignore::ResourceWarning",
+    #    "ignore::FutureWarning",
+]
+
+
+testpaths = [
+    "tests",
+]
+
+
+[tool.coverage.run]
+data_file = "docs/reports/.coverage"
+relative_files = true
+omit = ["tests/*"]
+
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+
+
+[tool.coverage.html]
+directory = "docs/reports"
