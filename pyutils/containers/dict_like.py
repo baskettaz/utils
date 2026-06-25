@@ -1,18 +1,13 @@
+from __future__ import annotations
 import bisect
 import re
-import sys
-from collections import deque
 from collections import OrderedDict
 from copy import deepcopy
-from numbers import Number
 from typing import Any
 from typing import Callable
+from typing import Self
 from typing import Hashable
 from typing import Iterable
-from typing import overload
-from typing import SupportsIndex
-from typing import Self
-
 
 
 class DefaultDictMixin(dict):

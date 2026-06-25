@@ -296,21 +296,20 @@ def test_repr(sample_dict):
     assert "'a': 2" in result
 
 
-
 @pytest.mark.parametrize(
     "actions, expected",
     [
         (
-                [("file", 1), ("file", 2), ("file", 3)],
-                {"file": 1, "file(1)": 2, "file(2)": 3},
+            [("file", 1), ("file", 2), ("file", 3)],
+            {"file": 1, "file(1)": 2, "file(2)": 3},
         ),
         (
-                [("data(1)", "a"), ("data(1)", "b")],
-                {"data(1)": "a", "data(2)": "b"},
+            [("data(1)", "a"), ("data(1)", "b")],
+            {"data(1)": "a", "data(2)": "b"},
         ),
         (
-                [("file", 1), ("something(2)", 2), ("file", 3)],
-                {"file": 1, "something(2)": 2, "file(1)": 3},
+            [("file", 1), ("something(2)", 2), ("file", 3)],
+            {"file": 1, "something(2)": 2, "file(1)": 3},
         ),
     ],
     ids=lambda v: f"{v}",
