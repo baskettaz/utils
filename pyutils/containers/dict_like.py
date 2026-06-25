@@ -11,6 +11,7 @@ from typing import Hashable
 from typing import Iterable
 from typing import overload
 from typing import SupportsIndex
+from typing import Self
 
 
 
@@ -73,7 +74,7 @@ class SingleEntryDict(dict):
             raise KeyError(f"The {key=} exists alredy!")
 
 
-class DefaultSingleEntryDict(DefaultLweDictMixin, SingleEntryDict):
+class DefaultSingleEntryDict(DefaultDictMixin, SingleEntryDict):
     pass
 
 
@@ -133,11 +134,11 @@ class SortedDict:
     This applies also to the `update()` method.
     """
 
-    def __init__(self, dictionary: dict | SortedDict = dict()) -> None:
+    def __init__(self, dictionary: "dict | SortedDict" = dict()) -> None:
         self.__keys: list = []
         self.__dict: dict = dict()
         if dictionary is not None:
-            if isinstance(dictionary, SortedDict):
+            if isinstance(dictionary, type(self)):
                 self.__dict = dictionary.__dict.copy()
                 self.__keys = dictionary.__keys[:]
             else:
@@ -146,14 +147,14 @@ class SortedDict:
 
     def update(
         self,
-        dictionary: dict | SortedDict | None = None,
+        dictionary: "dict | SortedDict | None" = None,
         **kwargs,
     ) -> None:
         "Updates this dictionary with another dictionary and/or key-value pairs as a keyword"
 
         if dictionary is None:
             pass
-        elif isinstance(dictionary, SortedDict):
+        elif isinstance(dictionary, type(self)):
             self.__dict.update(dictionary.__dict)
         elif isinstance(dictionary, dict) or not hasattr(dictionary, "items"):
             self.__dict.update(dictionary)
@@ -192,7 +193,7 @@ class SortedDict:
         """
         self.__dict[self.__keys[index]] = value
 
-    def copy(self) -> SortedDict:
+    def copy(self) -> Self:
         "Shallow copy of the `SortedDict`"
         dictionary = SortedDict()
         dictionary.__keys = self.__keys[:]

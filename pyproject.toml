@@ -8,6 +8,9 @@ dependencies = [
     "coverage>=7.14.3",
     "pytest>=9.1.1",
     "pytest-sugar>=1.1.1",
+    "ruff>=0.15.19",
+    "ty>=0.0.53",
+    "zensical>=0.0.46",
 ]
 
 
